@@ -32,7 +32,7 @@
             background-color: var(--gallery);
             color: var(--obsidian);
             font-family: var(--font-sans);
-            line-height: 1.5; /* Tighter line height for fit */
+            line-height: 1.5;
             overflow-x: hidden;
         }
         
@@ -43,36 +43,36 @@
         h2 { font-size: 2.8rem; margin-bottom: 1rem; letter-spacing: -0.01em; }
         h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
         
-        p { color: #52525b; margin-bottom: 1rem; font-size: 0.95rem; line-height: 1.6; }
+        p { color: #52525b; margin-bottom: 1.5rem; font-size: 1rem; line-height: 1.6; }
         
         .label {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.2em;
             font-weight: 700;
             color: var(--brass);
             display: block;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         /* Utilities */
         .container { max-width: var(--max-width); margin: 0 auto; padding: 0 2rem; width: 100%; }
         
-        /* ONE PAGE FIT: Min-Height 100vh + Reduced Padding */
+        /* Section Fitting: Ensure content snaps to screen height where possible */
         .section { 
+            padding: 4rem 0; 
             min-height: 100vh; 
             display: flex; 
             align-items: center; 
-            padding: 3rem 0; /* Reduced from 5rem */
             border-bottom: 1px solid var(--border); 
             scroll-margin-top: var(--header-height); 
         }
         
-        /* Exception for footer/content heavy sections */
-        .section-auto { min-height: auto; padding: 5rem 0; display: block; }
+        /* Exception for content heavy sections (like Deliverables) */
+        .section-auto { min-height: auto; padding: 6rem 0; display: block; }
 
         .hidden { display: none !important; }
-        .italic { font-style: italic; }
+        .italic { font-style: italic; color: var(--stone); }
         .text-center { text-align: center; }
         
         /* Grids */
@@ -97,10 +97,10 @@
         
         /* Buttons */
         .btn {
-            display: inline-block; padding: 0.8rem 1.5rem; /* Slightly smaller for fit */
+            display: inline-block; padding: 1rem 2rem;
             font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em;
             cursor: pointer; transition: all 0.3s ease; text-decoration: none;
-            border: 1px solid var(--obsidian); min-width: 160px; text-align: center;
+            border: 1px solid var(--obsidian); min-width: 180px; text-align: center;
         }
         .btn-primary { background: var(--obsidian); color: white; }
         .btn-primary:hover { background: var(--brass); border-color: var(--brass); }
@@ -118,29 +118,35 @@
         .nav-brand { display: flex; align-items: center; gap: 1rem; text-decoration: none; color: var(--obsidian); }
         .nav-links a {
             font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 600;
-            text-decoration: none; color: var(--stone); margin-left: 1.5rem; transition: color 0.3s;
+            text-decoration: none; color: var(--stone); margin-left: 2rem; transition: color 0.3s;
         }
         .nav-links a:hover { color: var(--obsidian); }
 
-        /* --- 4. HERO LOGIC --- */
+        /* --- 4. HERO LOGIC (Spacebar X-Ray) --- */
         .hero-text-area { position: relative; min-height: 400px; display: flex; flex-direction: column; justify-content: center; }
         .layer { transition: all 0.6s var(--curve); position: absolute; top: 0; left: 0; width: 100%; background: var(--gallery); }
         .layer.deep { opacity: 0; transform: scale(1.05); filter: blur(10px); pointer-events: none; z-index: 1;}
         .layer.surface { opacity: 1; transform: scale(1); filter: blur(0); z-index: 2; }
+        
+        /* Active State */
         body.xray-active .layer.surface { opacity: 0; transform: scale(0.95); filter: blur(5px); }
         body.xray-active .layer.deep { opacity: 1; transform: scale(1); filter: blur(0); pointer-events: auto; }
 
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* Spacebar Badge */
-        .spacebar-badge { margin-top: 2rem; display: flex; align-items: center; gap: 12px; cursor: pointer; user-select: none; }
-        .keycap { border: 1px solid #d4d4d8; padding: 4px 8px; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--obsidian); background: white; box-shadow: 0 2px 0 rgba(0,0,0,0.1); }
-        .key-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--stone); font-weight: 600; }
+        /* Spacebar Badge (Matches Screenshot) */
+        .spacebar-badge { margin-top: 3rem; display: flex; align-items: center; gap: 12px; cursor: pointer; user-select: none; }
+        .keycap { 
+            border: 1px solid #d4d4d8; padding: 4px 8px; font-size: 0.65rem; 
+            text-transform: uppercase; letter-spacing: 0.1em; color: var(--obsidian); 
+            background: white; box-shadow: 0 2px 0 rgba(0,0,0,0.1); font-family: var(--font-sans);
+        }
+        .key-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.15em; color: #a1a1aa; font-weight: 600; }
 
-        /* --- 5. RISK GRAPH --- */
+        /* --- 5. RISK GRAPH (Detailed) --- */
         .chart-wrapper { background: #fff; border: 1px solid var(--border); padding: 2rem; position: relative; }
-        .chart-container { height: 250px; display: flex; align-items: flex-end; justify-content: space-around; gap: 20px; margin-top: 1rem; padding-left: 30px; border-left: 1px solid var(--border); border-bottom: 1px solid var(--border); position: relative; }
+        .chart-container { height: 280px; display: flex; align-items: flex-end; justify-content: space-around; gap: 20px; margin-top: 1rem; padding-left: 30px; border-left: 1px solid var(--border); border-bottom: 1px solid var(--border); position: relative; }
         .y-axis-line { position: absolute; left: 0; width: 100%; height: 1px; background: rgba(0,0,0,0.05); pointer-events: none; }
         .y-axis-label { position: absolute; left: -40px; font-size: 0.7rem; color: var(--stone); font-family: var(--font-sans); }
         .bar-group { flex: 1; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; position: relative; }
@@ -149,25 +155,25 @@
         .bar-value { position: absolute; top: -30px; left: 50%; transform: translateX(-50%); font-size: 0.9rem; font-weight: 700; color: var(--obsidian); opacity: 0; transition: opacity 1s 1s; }
         .reveal.active .bar-value { opacity: 1; }
         .bar-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 15px; color: var(--stone); text-align: center; }
-        .chart-context { margin-top: 1.5rem; background: rgba(180, 151, 90, 0.05); border: 1px solid rgba(180, 151, 90, 0.2); padding: 1rem; display: flex; gap: 1rem; align-items: start; }
+        .chart-context { margin-top: 2rem; background: rgba(180, 151, 90, 0.05); border: 1px solid rgba(180, 151, 90, 0.2); padding: 1rem; display: flex; gap: 1rem; align-items: start; }
 
         /* --- 6. PROCESS TIMELINE --- */
-        .process-container { display: flex; justify-content: space-between; position: relative; margin-top: 3rem; }
+        .process-container { display: flex; justify-content: space-between; position: relative; margin-top: 4rem; }
         .process-line { position: absolute; top: 20px; left: 0; width: 100%; height: 1px; background-color: #e5e5e5; z-index: 0; }
-        .process-step { position: relative; z-index: 1; flex: 1; padding-right: 1.5rem; }
+        .process-step { position: relative; z-index: 1; flex: 1; padding-right: 2rem; }
         .process-step:last-child { padding-right: 0; }
-        .process-number { width: 40px; height: 40px; background-color: var(--obsidian); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-weight: 700; font-size: 0.9rem; margin-bottom: 1rem; box-shadow: 0 0 0 8px var(--gallery); }
-        .process-title { font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 0.5rem; color: var(--obsidian); }
-        .process-desc { font-size: 0.95rem; color: var(--stone); line-height: 1.4; font-weight: 300; }
+        .process-number { width: 40px; height: 40px; background-color: var(--obsidian); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-sans); font-weight: 700; font-size: 0.9rem; margin-bottom: 1.5rem; box-shadow: 0 0 0 8px var(--gallery); }
+        .process-title { font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 0.75rem; color: var(--obsidian); }
+        .process-desc { font-size: 1.05rem; color: var(--stone); line-height: 1.5; font-weight: 300; }
 
         /* --- 7. APPROACH CARDS --- */
         .approach-card { background: white; padding: 1.5rem; border: 1px solid var(--border); text-align: left; transition: border-color 0.3s; height: 100%; }
         .approach-card:hover { border-color: var(--brass); }
-        .approach-number { font-size: 2rem; color: #e4e4e7; margin-bottom: 0.5rem; font-family: var(--font-serif); }
+        .approach-number { font-size: 2rem; color: #e4e4e7; margin-bottom: 0.75rem; font-family: var(--font-serif); }
         .approach-title { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.15em; font-weight: 800; color: var(--obsidian); margin-bottom: 0.5rem; }
         .approach-desc { font-size: 0.85rem; color: var(--stone); margin-bottom: 0; }
 
-        /* --- 8. DELIVERABLES (Dark Mode) --- */
+        /* --- 8. DELIVERABLES (Dark) --- */
         .bg-slate { background-color: var(--slate); color: white; }
         .deliverable-card { border: 1px solid rgba(255,255,255,0.1); padding: 1.5rem; transition: all 0.3s ease; }
         .deliverable-card:hover { border-color: var(--brass); background: rgba(255,255,255,0.02); }
@@ -177,9 +183,9 @@
 
         /* --- 9. HERO GRAPHIC --- */
         .hero-image-container { position: relative; width: 100%; height: auto; display: flex; justify-content: center; align-items: center; }
-        .hero-svg { width: 100%; height: auto; max-width: 480px; display: block; filter: drop-shadow(20px 20px 30px rgba(0,0,0,0.1)); }
+        .hero-svg { width: 100%; height: auto; max-width: 500px; display: block; filter: drop-shadow(20px 20px 30px rgba(0,0,0,0.1)); }
         
-        .case-card { background: white; padding: 2rem; border: 1px solid var(--border); cursor: pointer; transition: all 0.3s; height: 100%; display: flex; flex-direction: column; justify-content: space-between; }
+        .case-card { background: white; padding: 2.5rem; border: 1px solid var(--border); cursor: pointer; transition: all 0.3s; }
         .case-card:hover { border-color: var(--brass); transform: translateY(-5px); }
         .case-tag { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--stone); margin-bottom: 1rem; display: block;}
 
@@ -224,7 +230,7 @@
         </div>
     </nav>
 
-    <section class="section" style="padding-top: 80px;">
+    <section class="section" style="padding-top: 80px; min-height: 90vh; display: flex; align-items: center; border-bottom: none;">
         <div class="container">
             <div class="grid-2">
                 <div class="hero-text-area">
@@ -233,8 +239,8 @@
                     <div style="position: relative; min-height: 250px;">
                         <div class="layer surface">
                             <h1 style="color: var(--obsidian);">Caught between <br> 
-                                <span class="italic" style="color: var(--stone);">Fear</span> and 
-                                <span class="italic" style="color: var(--stone);">FOMO.</span>
+                                <span class="italic">Fear</span> and 
+                                <span class="italic">FOMO.</span>
                             </h1>
                             <p style="font-size: 1.1rem; max-width: 480px;">
                                 You are under pressure to innovate, but terrified of the risks. In Finance and Healthcare, "move fast and break things" isn't a strategy—it's a liability.
@@ -270,11 +276,14 @@
                         <line x1="150" y1="50" x2="150" y2="450" stroke="rgba(9,9,11,0.1)"/>
                         <line x1="250" y1="50" x2="250" y2="450" stroke="rgba(9,9,11,0.1)"/>
                         <line x1="350" y1="50" x2="350" y2="450" stroke="rgba(9,9,11,0.1)"/>
+                        
                         <rect x="80" y="80" width="300" height="300" stroke="#09090b" stroke-width="2"/>
                         <rect x="120" y="120" width="300" height="300" stroke="#b4975a" stroke-width="2" stroke-opacity="0.5"/>
+                        
                         <rect x="160" y="340" width="200" height="100" fill="white" stroke="#09090b" stroke-width="2"/>
                         <text x="180" y="380" font-family="serif" font-size="32" fill="#09090b">20+</text>
                         <text x="180" y="405" font-family="sans-serif" font-size="10" letter-spacing="0.2em" fill="#b4975a" font-weight="bold">YEARS EXP</text>
+                        
                         <circle cx="80" cy="80" r="4" fill="#09090b"/>
                         <circle cx="380" cy="80" r="4" fill="#09090b"/>
                         <circle cx="380" cy="380" r="4" fill="#09090b"/>
@@ -285,7 +294,7 @@
         </div>
     </section>
 
-    <section id="problem" class="section">
+    <section id="problem" class="section" style="background: white;">
         <div class="container">
             <div class="grid-2" style="align-items: start;">
                 <div class="reveal">
@@ -385,7 +394,10 @@
                     <div class="process-number">3</div>
                     <h3 class="process-title">Deliverables & ROI</h3>
                     <p class="process-desc">Producing key deliverables including AI/ML use cases, automation architecture, and detailed ROI business cases.</p>
-                    <button onclick="window.open('AI_Intelligence_Hub_33.html', '_blank')" class="btn btn-secondary" style="margin-top: 1rem; font-size: 0.7rem; padding: 0.5rem 1rem;">Open Strategy Hub &rarr;</button>
+                    
+                    <a href="hub.html" target="_blank" class="btn btn-secondary" style="margin-top: 1.5rem; font-size: 0.75rem; width: 100%; position: relative; z-index: 50;">
+                        Open Strategy Hub &rarr;
+                    </a>
                 </div>
             </div>
             
@@ -636,5 +648,4 @@
     </script>
 
 </body>
-
 </html>
